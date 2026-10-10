@@ -1,0 +1,29 @@
+# Scripted effects for the "exile heir" decisions.
+# These are executed in the scope of the RECEIVING SUBJECT country,
+# so the heir is taken from ROOT (the overlord) via ROOT = { ... }.
+
+# normal march (also matches custom march-like subject types, e.g. cnpro_duhufu)
+exile_heir_receive_into_march = {
+	ROOT = { exile_heir_as = exiled_heir_march }
+	if = {
+		limit = { has_heir = yes }
+		remove_heir = {}
+	}
+	set_heir = exiled_heir_march
+	kill_ruler = yes
+	add_stability = 1
+	set_country_flag = exile_heir_received
+}
+
+# normal vassal
+exile_heir_receive_into_vassal = {
+	ROOT = { exile_heir_as = exiled_heir_vassal }
+	if = {
+		limit = { has_heir = yes }
+		remove_heir = {}
+	}
+	set_heir = exiled_heir_vassal
+	kill_ruler = yes
+	add_stability = 1
+	set_country_flag = exile_heir_received
+}

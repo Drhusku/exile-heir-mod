@@ -1,0 +1,139 @@
+country_decisions = {
+	# RULES
+	# 1) A subject of OUR OWN dynasty is skipped (dynasty = ROOT).
+	# 2) Among the rest we rotate: whoever already received an exiled heir
+	#    (flag exile_heir_received) is skipped next time.
+	# 3) When the rotation is exhausted, the flags are cleared and it starts over.
+	# 4) If EVERY subject shares our dynasty, we fall back to just picking any of them.
+	# Every branch is guarded by a matching "any_subject_country" check, so the
+	# random pick can never come up empty and the heir is never lost.
+
+	# === 1. exile heir to a MARCH (any subject type with is_march = yes) ===
+	exile_heir_to_march = {
+		potential = {
+			has_heir = yes
+			any_subject_country = {
+				is_march = yes
+			}
+		}
+		allow = {
+			prestige = 50
+		}
+		effect = {
+			# 1) different dynasty AND not yet used in this rotation
+			if = {
+				limit = {
+					any_subject_country = {
+						is_march = yes
+						NOT = { dynasty = ROOT }
+						NOT = { has_country_flag = exile_heir_received }
+					}
+				}
+				random_subject_country = {
+					limit = {
+						is_march = yes
+						NOT = { dynasty = ROOT }
+						NOT = { has_country_flag = exile_heir_received }
+					}
+					exile_heir_receive_into_march = yes
+				}
+			}
+			# 2) rotation exhausted -> reset it, still avoiding our own dynasty
+			else_if = {
+				limit = {
+					any_subject_country = {
+						is_march = yes
+						NOT = { dynasty = ROOT }
+					}
+				}
+				every_subject_country = {
+					limit = { has_country_flag = exile_heir_received }
+					clr_country_flag = exile_heir_received
+				}
+				random_subject_country = {
+					limit = {
+						is_march = yes
+						NOT = { dynasty = ROOT }
+					}
+					exile_heir_receive_into_march = yes
+				}
+			}
+			# 3) every march shares our dynasty -> pick any march at all
+			else = {
+				random_subject_country = {
+					limit = {
+						is_march = yes
+					}
+					exile_heir_receive_into_march = yes
+				}
+			}
+			add_prestige = -50
+		}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+
+	# === 2. exile heir to a normal VASSAL ===
+	exile_heir_to_vassal = {
+		potential = {
+			has_heir = yes
+			any_subject_country = {
+				is_subject_of_type = vassal
+			}
+		}
+		allow = {
+			prestige = 50
+		}
+		effect = {
+			if = {
+				limit = {
+					any_subject_country = {
+						is_subject_of_type = vassal
+						NOT = { dynasty = ROOT }
+						NOT = { has_country_flag = exile_heir_received }
+					}
+				}
+				random_subject_country = {
+					limit = {
+						is_subject_of_type = vassal
+						NOT = { dynasty = ROOT }
+						NOT = { has_country_flag = exile_heir_received }
+					}
+					exile_heir_receive_into_vassal = yes
+				}
+			}
+			else_if = {
+				limit = {
+					any_subject_country = {
+						is_subject_of_type = vassal
+						NOT = { dynasty = ROOT }
+					}
+				}
+				every_subject_country = {
+					limit = { has_country_flag = exile_heir_received }
+					clr_country_flag = exile_heir_received
+				}
+				random_subject_country = {
+					limit = {
+						is_subject_of_type = vassal
+						NOT = { dynasty = ROOT }
+					}
+					exile_heir_receive_into_vassal = yes
+				}
+			}
+			else = {
+				random_subject_country = {
+					limit = {
+						is_subject_of_type = vassal
+					}
+					exile_heir_receive_into_vassal = yes
+				}
+			}
+			add_prestige = -50
+		}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+}

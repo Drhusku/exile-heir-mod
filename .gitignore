@@ -1,0 +1,6 @@
+# 临时/无关文件
+*.zip
+*.tmp
+*.bak
+Thumbs.db
+.DS_Store
