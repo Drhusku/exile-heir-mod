@@ -1,0 +1,5 @@
+﻿l_english:
+ exile_heir_to_march_title:0 "Exile Heir to a March"
+ exile_heir_to_march_desc:0 "Our heir is a good-for-nothing fool - a blithering incompetent who would drag our realm into ruin. Rather than suffer their presence at court, we shall pack them off to govern one of our loyal marches, far from our capital.\n\nMarches ruled by our own dynasty are skipped, and a subject that already received an exiled heir is skipped until the rotation comes round again. If every march shares our dynasty, any of them will do.\n\nNote: a march cannot be annexed by diplomatic means."
+ exile_heir_to_vassal_title:0 "Exile Heir to a Vassal"
+ exile_heir_to_vassal_desc:0 "Our heir is a good-for-nothing fool - a blithering incompetent who would drag our realm into ruin. Rather than suffer their presence at court, we shall pack them off to govern one of our loyal vassals, far from our capital.\n\nVassals ruled by our own dynasty are skipped, and a subject that already received an exiled heir is skipped until the rotation comes round again. If every vassal shares our dynasty, any of them will do.\n\nA vassal can be annexed diplomatically later."
